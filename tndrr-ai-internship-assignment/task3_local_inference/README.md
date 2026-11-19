@@ -1,4 +1,4 @@
-# Task 3: Local LLM Inference & Quantization Benchmark (Q8_0 vs Q4_K_M)
+# Task 3: Local LLM Inference & Quantization Benchmark (`Q8_0` vs `Q4_K_M`)
 
 **Tndrr AI Internship Assignment – Task 3**  
 **Component:** Local CPU Inference, Quantization Benchmarking, and Serving Estimation  
@@ -14,8 +14,8 @@
 In production deployments, deploying full-precision (FP16/BF16) language models on resource-constrained edge devices (laptops, mobile workstations) is often impractical due to strict RAM and memory-bandwidth constraints. Quantization compresses model weight tensors into lower bit-width representations (e.g., 8-bit or 4-bit integers), enabling local CPU inference.
 
 This benchmark conducts a rigorous, empirical comparison of two quantization levels of the **exact same model** (`Qwen2.5-0.5B-Instruct`):
-- **Q8_0:** Symmetrical 8-bit quantization; serves as the near-lossless high-precision baseline.
-- **Q4_K_M:** 4-bit medium k-quantization using variable bit allocation across attention and feed-forward projection layers.
+- **`Q8_0`:** Symmetrical 8-bit quantization; serves as the near-lossless high-precision baseline.
+- **`Q4_K_M`:** 4-bit medium k-quantization using variable bit allocation across attention and feed-forward projection layers.
 
 Both variants are benchmarked across a fixed suite of **ten standardized evaluation prompts** using deterministic greedy decoding (`temperature = 0.0`, `seed = 42`, `context = 2048`, `max_tokens = 256`).
 
@@ -87,9 +87,9 @@ In autoregressive decoding, generation proceeds token by token:
   - Reading a 352 MB model (`Q4_K_M`) increases throughput to $\approx 42\text{–}48\text{ t/s}$.
   - **Conclusion:** Quantization on CPU does not just save RAM; it directly scales generation speed by reducing byte traffic across the memory bus.
 
-### 2. Quantization Mechanics: Q8_0 vs. Q4_K_M
-- **Q8_0:** Uniform 8-bit quantization. Divides weights into blocks of 32 values, scaling each block by a float16 factor. Retains $>99.8\%$ of FP16 perplexity.
-- **Q4_K_M (K-Quants):** Non-uniform 4-bit quantization with variable bit allocation. Critical layers (attention $v\_proj$ and feed-forward down-projections) receive higher bit-precision (e.g. 5-bit or 6-bit), while less critical layers receive 4-bit blocks. This achieves superior perplexity compared to uniform 4-bit schemes.
+### 2. Quantization Mechanics: `Q8_0` vs. `Q4_K_M`
+- **`Q8_0`:** Uniform 8-bit quantization. Divides weights into blocks of 32 values, scaling each block by a float16 factor. Retains $>99.8\%$ of FP16 perplexity.
+- **`Q4_K_M` (K-Quants):** Non-uniform 4-bit quantization with variable bit allocation. Critical layers (attention $v_{proj}$ and feed-forward down-projections) receive higher bit-precision (e.g. 5-bit or 6-bit), while less critical layers receive 4-bit blocks. This achieves superior perplexity compared to uniform 4-bit schemes.
 
 ### 3. KV Cache Architecture and Mathematical Formulation
 In Transformer models, calculating attention requires key ($K$) and value ($V$) vectors for all preceding tokens in the context window. To avoid quadratic recomputation, these vectors are cached in memory (the **KV Cache**).
@@ -164,7 +164,7 @@ cd tndrr-ai-internship-assignment/task3_local_inference
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Download Q8_0 and Q4_K_M GGUF models (~876 MB total)
+# 2. Download `Q8_0` and `Q4_K_M` GGUF models (~876 MB total)
 python download_model.py --variant all
 
 # 3. Run benchmark on both variants (writes results/q8_results.json and results/q4_results.json)
@@ -180,7 +180,7 @@ python memory_estimation.py
 ### Option B: Google Colab Alternative (GPU / High-RAM CPU)
 
 1. Open Google Colab and open `task3_quantization_benchmark.ipynb` (or open from GitHub).
-2. Run all cells sequentially to download models, benchmark Q8_0 vs Q4_K_M, export the comparison CSV, and calculate serving constraints.
+2. Run all cells sequentially to download models, benchmark `Q8_0` vs `Q4_K_M`, export the comparison CSV, and calculate serving constraints.
 
 ---
 

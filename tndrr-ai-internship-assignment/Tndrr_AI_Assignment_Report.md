@@ -67,7 +67,7 @@ Trained for 3 epochs (225 steps, batch size 4, lr $2 \times 10^{-4}$, cosine dec
 | **JSON Validity Rate** | 98.3% (59/60) | **100.0% (60/60)** | +1.7% | Flawless bracket balance and quote escaping across all runs |
 | **Exact Match Accuracy** | 1.7% (1/60) | **96.7% (58/60)** | **+95.0%** | Base model emits conversational preambles; LoRA emits exact target |
 | **Intent Classification** | 60.0% (36/60) | **98.3% (59/60)** | **+38.3%** | Near-perfect routing between overlapping actions and null fallbacks |
-| **Entity Key Accuracy** | 41.7% (25/60) | **98.3% (59/60)** | **+56.6%** | Eliminates hallucinated keys (e.g. "time_slot" instead of "time") |
+| **Entity Key Accuracy** | 41.7% (25/60) | **98.3% (59/60)** | **+56.6%** | Eliminates hallucinated keys (e.g. `"time_slot"` instead of `"time"`) |
 | **Field-Level Value Accuracy** | 58.9% | **98.9%** | **+40.0%** | Correct slot assignment including canonical explicit `null`s |
 
 ### 4. Qualitative Failure Case Analysis
@@ -131,7 +131,7 @@ Benchmarked against 15 manually verified gold questions covering definitions, go
 
 ## Page 4 — Task 3: Local LLM Inference and Conclusion
 
-### 1. Local Quantization Benchmark: Q8_0 vs. Q4_K_M
+### 1. Local Quantization Benchmark: `Q8_0` vs. `Q4_K_M`
 Benchmarked two GGUF quantization variants of `Qwen2.5-0.5B-Instruct` on an Intel Core i5 10th Gen laptop CPU (4 cores, 8GB RAM) across a standardized 10-prompt test suite (covering reasoning, coding, factual QA, summarization, and JSON generation):
 
 | Performance Metric | Baseline: 8-bit (`Q8_0`) | Quantized: 4-bit (`Q4_K_M`) | Relative Change | Operational Impact |
@@ -158,11 +158,11 @@ $$\text{KV Bytes per Token} = 2 \times N_{\text{layers}} \times N_{\text{kv\_hea
 
 | Model Architecture & Config | Weights VRAM | Context Length | KV per User | Total KV (20 Users) | Total VRAM Needed | Serving Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Qwen2.5-0.5B** (Q4_K_M, 16-bit KV) | 0.35 GB | 4,096 tokens | 49.1 MB | 0.98 GB | **3.33 GB** | Feasible (<15% Load) |
-| **Qwen2.5-0.5B** (Q4_K_M, 16-bit KV) | 0.35 GB | 32,768 tokens | 393.2 MB | 7.86 GB | **10.21 GB** | Feasible (<45% Load) |
-| **Qwen2.5-7B** (Q4_K_M, 16-bit KV, GQA-8) | 4.50 GB | 4,096 tokens | 224.0 MB | 4.48 GB | **10.98 GB** | Feasible (<50% Load) |
+| **Qwen2.5-0.5B** (`Q4_K_M`, 16-bit KV) | 0.35 GB | 4,096 tokens | 49.1 MB | 0.98 GB | **3.33 GB** | Feasible (<15% Load) |
+| **Qwen2.5-0.5B** (`Q4_K_M`, 16-bit KV) | 0.35 GB | 32,768 tokens | 393.2 MB | 7.86 GB | **10.21 GB** | Feasible (<45% Load) |
+| **Qwen2.5-7B** (`Q4_K_M`, 16-bit KV, GQA-8) | 4.50 GB | 4,096 tokens | 224.0 MB | 4.48 GB | **10.98 GB** | Feasible (<50% Load) |
 | **Qwen2.5-7B** (FP16 Base, 16-bit KV) | 15.50 GB | 8,192 tokens | 448.0 MB | 8.96 GB | **26.46 GB** | **OOM Crash (>24 GB)** |
-| **Qwen2.5-7B** (Q4_K_M, FP8 KV, GQA-8) | 4.50 GB | 8,192 tokens | 224.0 MB | 4.48 GB | **10.98 GB** | Feasible with vLLM PagedAttn |
+| **Qwen2.5-7B** (`Q4_K_M`, FP8 KV, GQA-8) | 4.50 GB | 8,192 tokens | 224.0 MB | 4.48 GB | **10.98 GB** | Feasible with vLLM PagedAttn |
 
 *Assumptions:* Continuous batching via vLLM PagedAttention (eliminating virtual memory fragmentation), GQA (Grouped-Query Attention with 2 to 8 KV heads), and uniform sequence distribution across users.
 
