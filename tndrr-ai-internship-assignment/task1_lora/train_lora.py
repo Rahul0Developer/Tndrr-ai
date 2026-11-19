@@ -168,7 +168,21 @@ def main() -> None:
         remove_columns=train_ds.column_names,
     )
 
-    collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
+    def data_collator(features):
+        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
+        max_len = max(len(f["input_ids"]) for f in features)
+        input_ids, attention_mask, labels = [], [], []
+        for f in features:
+            cur_len = len(f["input_ids"])
+            diff = max_len - cur_len
+            input_ids.append(f["input_ids"] + [pad_id] * diff)
+            attention_mask.append([1] * cur_len + [0] * diff)
+            labels.append(f["labels"] + [-100] * diff)
+        return {
+            "input_ids": torch.tensor(input_ids, dtype=torch.long),
+            "attention_mask": torch.tensor(attention_mask, dtype=torch.long),
+            "labels": torch.tensor(labels, dtype=torch.long),
+        }
 
     import inspect
     sig = inspect.signature(TrainingArguments.__init__).parameters
@@ -204,7 +218,7 @@ def main() -> None:
         model=model,
         args=training_args,
         train_dataset=train_ds,
-        data_collator=collator,
+        data_collator=data_collator,
     )
 
     start_wall_time = time.time()
