@@ -70,20 +70,54 @@ SEARCH_TOPICS = [
     "GGUF format explained", "how cosine similarity works",
     "best practices for prompt engineering", "what is KV cache",
     "sentence transformers MiniLM model", "vector database vs numpy search",
+    "PyTorch gradient checkpointing", "flash attention mechanism",
+    "parameter efficient fine tuning techniques", "Hugging Face transformers Trainer API",
+    "bitsandbytes 4-bit quantization", "QLoRA vs standard LoRA comparison",
+    "retrieval augmented generation architecture", "BM25 vs dense embeddings",
+    "Docker containerization tutorial", "FastAPI async endpoints",
+    "PostgreSQL indexing best practices", "cross-entropy loss explained",
+    "AdamW optimizer weight decay", "learning rate warm up cosine schedule",
+    "GPU memory management in PyTorch", "CUDA out of memory error fixes",
+    "tokenization with byte pair encoding", "rotary position embeddings RoPE",
+    "mixture of experts architecture", "direct preference optimization DPO",
+    "reinforcement learning from human feedback RLHF", "speculative decoding explained",
+    "contrastive search decoding",
 ]
 DATES = [f"2026-1{m}-0{d}" if d < 10 else f"2026-1{m}-{d}"
          for m in (1, 2) for d in range(9, 25)]  # Nov/Dec 2026 dates
 TIMES = [f"{h:02d}:{m:02d}" for h in range(7, 22) for m in (0, 15, 30, 45)]
 UNITS_TEMP = ["celsius", "fahrenheit"]
 
-# Ambiguous / off-domain inputs -> query_null policy
+# Ambiguous / off-domain inputs -> query_null policy (70+ unique utterances)
 NULL_UTTERANCES = [
     "asdfgh qwerty", "please do the thing you know", "hmm yeah so basically",
     "can you help me with that stuff", "banana flask orbit", "u know what i mean",
     "do it whenever", "tell me something cool about numbers or whatever",
     "the usual, you remember", "idk man just handle it", "blue silence loudly",
     "same as last time but different", "make it pop", "thingy over there",
-    "what about, you know, weather-ish but not really",
+    "what about, you know, weather-ish but not really", "hello there how are you",
+    "good morning", "thank you so much for everything", "hey what's up",
+    "what is the meaning of life", "why is the sky blue", "tell me a joke",
+    "take care of that task", "send it to them", "remind me later about that",
+    "check the thing on the board", "can you look at this", "just wondering about that",
+    "not sure what to do here", "maybe tomorrow or sometime", "whatever you think is best",
+    "do the needful", "sort this out please", "got a quick question for ya",
+    "is everything alright", "let's see what happens", "just checking in",
+    "testing one two three", "ping me later maybe", "okay sounds good to me",
+    "no problem at all", "can we talk about something else", "random noise 123",
+    "whoops wrong window", "never mind cancel that", "skip this one",
+    "blah blah blah", "just testing the system", "write a poem about cats",
+    "who was the first person on mars", "what is two plus two", "how far away is the moon",
+    "translate hello into french", "can you code in rust", "play some jazz music",
+    "open the pod bay doors please", "roll a six sided die", "flip a coin for me",
+    "sing me an opera song", "summarize war and peace in three words",
+    "what is your favorite color", "how tall is mount everest", "tell me a bedtime story",
+    "draw an ascii picture of a cat", "recite the alphabet backwards",
+    "what year was the printing press invented", "why do birds fly south in winter",
+    "explain quantum physics simply", "what time does the sun set in wonderland",
+    "give me a recipe for chocolate chip cookies", "can dogs eat peanut butter safely",
+    "generate a random password for me", "recommend a good science fiction movie",
+    "how do airplanes stay in the air", "tell me an interesting history fact",
 ]
 
 # Relative-date phrasings (no explicit date/time given -> null fields)
@@ -243,19 +277,32 @@ def normalise(text: str) -> str:
 
 
 def build_pool(target_n: int, rng: random.Random, forbidden: set[str]) -> list[dict]:
-    """Generate `target_n` unique examples avoiding `forbidden` normalised texts."""
+    """Generate `target_n` unique examples avoiding `forbidden` normalised texts.
+    
+    Guarantees balanced representation across all intent categories.
+    """
     pool: list[dict] = []
     seen: set[str] = set()
+    n_per_gen = target_n // len(GENERATORS)
+    gen_counts = {gen.__name__.replace("_mk_", ""): 0 for gen in GENERATORS}
+
     attempts = 0
-    while len(pool) < target_n and attempts < target_n * 200:
+    max_attempts = target_n * 500
+    while len(pool) < target_n and attempts < max_attempts:
         attempts += 1
-        gen = rng.choices(GENERATORS, weights=WEIGHTS, k=1)[0]
+        # Prioritize generators that have not yet reached their target quota
+        available_gens = [g for g in GENERATORS if gen_counts[g.__name__.replace("_mk_", "")] < n_per_gen]
+        if not available_gens:
+            available_gens = GENERATORS
+        gen = rng.choice(available_gens)
+
         text, ents = gen(rng)
         intent = gen.__name__.replace("_mk_", "")
         key = normalise(text)
         if key in seen or key in forbidden:
             continue
         seen.add(key)
+        gen_counts[intent] += 1
         pool.append({
             "messages": [
                 {"role": "system", "content": SYSTEM_PROMPT},
@@ -265,6 +312,8 @@ def build_pool(target_n: int, rng: random.Random, forbidden: set[str]) -> list[d
         })
     if len(pool) < target_n:
         raise RuntimeError(f"Only produced {len(pool)}/{target_n} unique examples")
+    
+    rng.shuffle(pool)
     return pool
 
 
@@ -288,6 +337,8 @@ def validate(examples: list[dict], name: str) -> None:
         assert k not in norm_seen, f"duplicate user text in {name}: {user!r}"
         norm_seen.add(k)
         intent_counts[tgt["intent"]] = intent_counts.get(tgt["intent"], 0) + 1
+    
+    assert len(intent_counts) >= 6, f"Expected at least 6 intents in {name}, found {len(intent_counts)}"
     print(f"[{name}] {len(examples)} examples | intents={intent_counts} | "
           f"null entity fields={null_field_count}")
 

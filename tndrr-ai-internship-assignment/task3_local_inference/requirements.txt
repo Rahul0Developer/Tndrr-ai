@@ -1,0 +1,4 @@
+psutil>=5.9.0
+numpy>=1.26.0
+llama-cpp-python>=0.2.80
+tqdm>=4.66.0

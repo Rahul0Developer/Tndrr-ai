@@ -1,0 +1,1160 @@
+{
+  "metric": "Recall@5 (hit-rate)",
+  "top_k": 5,
+  "configs": {
+    "c300": {
+      "recall_at_5": 0.7333333333333333,
+      "hits": 11,
+      "n_questions": 15,
+      "details": [
+        {
+          "id": "q01",
+          "question": "What is the name and version of the framework described in this document?",
+          "recalled": true,
+          "expected_page": 1,
+          "top5": [
+            {
+              "chunk_id": "c300-0007",
+              "page": 8,
+              "score": 0.327,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0006",
+              "page": 7,
+              "score": 0.316,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.2997,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0033",
+              "page": 26,
+              "score": 0.2919,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0031",
+              "page": 25,
+              "score": 0.2919,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q02",
+          "question": "Which organization published the AI RMF 1.0?",
+          "recalled": true,
+          "expected_page": 1,
+          "top5": [
+            {
+              "chunk_id": "c300-0062",
+              "page": 47,
+              "score": 0.6247,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0007",
+              "page": 8,
+              "score": 0.5855,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0006",
+              "page": 7,
+              "score": 0.5699,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0000",
+              "page": 1,
+              "score": 0.5603,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0061",
+              "page": 47,
+              "score": 0.5539,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q03",
+          "question": "Is participation in the AI RMF mandatory or voluntary for organizations?",
+          "recalled": true,
+          "expected_page": 7,
+          "top5": [
+            {
+              "chunk_id": "c300-0062",
+              "page": 47,
+              "score": 0.5604,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0006",
+              "page": 7,
+              "score": 0.529,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.5,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0005",
+              "page": 6,
+              "score": 0.4911,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0016",
+              "page": 13,
+              "score": 0.4748,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q04",
+          "question": "How does Figure 4 describe the characteristics of trustworthy AI systems?",
+          "recalled": true,
+          "expected_page": 5,
+          "top5": [
+            {
+              "chunk_id": "c300-0019",
+              "page": 16,
+              "score": 0.7614,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0002",
+              "page": 4,
+              "score": 0.7248,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0021",
+              "page": 18,
+              "score": 0.6874,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0009",
+              "page": 9,
+              "score": 0.6657,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0025",
+              "page": 20,
+              "score": 0.6438,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q05",
+          "question": "What are the four functions that make up the AI RMF Core?",
+          "recalled": true,
+          "expected_page": 25,
+          "top5": [
+            {
+              "chunk_id": "c300-0031",
+              "page": 25,
+              "score": 0.713,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0007",
+              "page": 8,
+              "score": 0.5856,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.5763,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0006",
+              "page": 7,
+              "score": 0.5534,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0047",
+              "page": 36,
+              "score": 0.5239,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q06",
+          "question": "How does the framework characterize risk when considering negative impacts of events?",
+          "recalled": true,
+          "expected_page": 9,
+          "top5": [
+            {
+              "chunk_id": "c300-0008",
+              "page": 8,
+              "score": 0.7215,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0011",
+              "page": 11,
+              "score": 0.5709,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0013",
+              "page": 12,
+              "score": 0.569,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0047",
+              "page": 36,
+              "score": 0.4728,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0009",
+              "page": 9,
+              "score": 0.472,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q07",
+          "question": "What do the GOVERN function's policies, processes and practices aim to establish across an organization?",
+          "recalled": true,
+          "expected_page": 27,
+          "top5": [
+            {
+              "chunk_id": "c300-0036",
+              "page": 28,
+              "score": 0.6104,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0035",
+              "page": 27,
+              "score": 0.5436,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0033",
+              "page": 26,
+              "score": 0.5359,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0034",
+              "page": 27,
+              "score": 0.5257,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.473,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q08",
+          "question": "What does the MAP function establish regarding AI risk?",
+          "recalled": false,
+          "expected_page": 31,
+          "top5": [
+            {
+              "chunk_id": "c300-0039",
+              "page": 30,
+              "score": 0.6868,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0060",
+              "page": 46,
+              "score": 0.6439,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0038",
+              "page": 30,
+              "score": 0.6419,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0055",
+              "page": 42,
+              "score": 0.5885,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0041",
+              "page": 32,
+              "score": 0.5864,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q09",
+          "question": "According to Table 3, what is evaluated for the MEASURE function's second category?",
+          "recalled": true,
+          "expected_page": 34,
+          "top5": [
+            {
+              "chunk_id": "c300-0044",
+              "page": 34,
+              "score": 0.4027,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0043",
+              "page": 33,
+              "score": 0.3109,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0042",
+              "page": 33,
+              "score": 0.2852,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.2773,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0039",
+              "page": 30,
+              "score": 0.2668,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "question": "What kinds of third-party risks does the MANAGE function address in its category 3?",
+          "recalled": true,
+          "expected_page": 37,
+          "top5": [
+            {
+              "chunk_id": "c300-0054",
+              "page": 42,
+              "score": 0.514,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0037",
+              "page": 29,
+              "score": 0.5077,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0033",
+              "page": 26,
+              "score": 0.5026,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0041",
+              "page": 32,
+              "score": 0.4989,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0010",
+              "page": 10,
+              "score": 0.4959,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q11",
+          "question": "What types of threats to fundamental values does the framework say AI risk management can help minimise?",
+          "recalled": false,
+          "expected_page": 9,
+          "top5": [
+            {
+              "chunk_id": "c300-0009",
+              "page": 9,
+              "score": 0.7308,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0058",
+              "page": 44,
+              "score": 0.7189,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0004",
+              "page": 6,
+              "score": 0.7099,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0015",
+              "page": 13,
+              "score": 0.7076,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0003",
+              "page": 5,
+              "score": 0.7066,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q12",
+          "question": "What does the framework say about the strength of trustworthiness across its characteristics?",
+          "recalled": true,
+          "expected_page": 17,
+          "top5": [
+            {
+              "chunk_id": "c300-0019",
+              "page": 16,
+              "score": 0.6581,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0021",
+              "page": 18,
+              "score": 0.5932,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0020",
+              "page": 17,
+              "score": 0.5579,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0022",
+              "page": 18,
+              "score": 0.4495,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0002",
+              "page": 4,
+              "score": 0.4424,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q13",
+          "question": "Does the framework prescribe one-size-fits-all requirements for managing AI risk?",
+          "recalled": true,
+          "expected_page": 47,
+          "top5": [
+            {
+              "chunk_id": "c300-0058",
+              "page": 44,
+              "score": 0.6353,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0012",
+              "page": 11,
+              "score": 0.6328,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0015",
+              "page": 13,
+              "score": 0.632,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0061",
+              "page": 47,
+              "score": 0.6168,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c300-0014",
+              "page": 12,
+              "score": 0.6153,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q14",
+          "question": "Why does the framework caution against expecting zero failures in AI systems?",
+          "recalled": false,
+          "expected_page": 12,
+          "top5": [
+            {
+              "chunk_id": "c300-0009",
+              "page": 9,
+              "score": 0.5077,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0023",
+              "page": 19,
+              "score": 0.4916,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0012",
+              "page": 11,
+              "score": 0.4878,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0030",
+              "page": 24,
+              "score": 0.4821,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0003",
+              "page": 5,
+              "score": 0.4807,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q15",
+          "question": "What role does the 'context of use' play when applying the framework?",
+          "recalled": false,
+          "expected_page": 12,
+          "top5": [
+            {
+              "chunk_id": "c300-0032",
+              "page": 26,
+              "score": 0.3588,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0033",
+              "page": 26,
+              "score": 0.2872,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0037",
+              "page": 29,
+              "score": 0.2737,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0049",
+              "page": 38,
+              "score": 0.26,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c300-0039",
+              "page": 30,
+              "score": 0.2536,
+              "relevant": false
+            }
+          ]
+        }
+      ]
+    },
+    "c600": {
+      "recall_at_5": 0.6,
+      "hits": 9,
+      "n_questions": 15,
+      "details": [
+        {
+          "id": "q01",
+          "question": "What is the name and version of the framework described in this document?",
+          "recalled": true,
+          "expected_page": 1,
+          "top5": [
+            {
+              "chunk_id": "c600-0000",
+              "page": 1,
+              "score": 0.2904,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.2841,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.2836,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0019",
+              "page": 33,
+              "score": 0.2393,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0027",
+              "page": 46,
+              "score": 0.2299,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q02",
+          "question": "Which organization published the AI RMF 1.0?",
+          "recalled": true,
+          "expected_page": 1,
+          "top5": [
+            {
+              "chunk_id": "c600-0000",
+              "page": 1,
+              "score": 0.5603,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.5496,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.5189,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0008",
+              "page": 14,
+              "score": 0.4482,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0007",
+              "page": 13,
+              "score": 0.4434,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q03",
+          "question": "Is participation in the AI RMF mandatory or voluntary for organizations?",
+          "recalled": false,
+          "expected_page": 7,
+          "top5": [
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.4614,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0007",
+              "page": 13,
+              "score": 0.4535,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0008",
+              "page": 14,
+              "score": 0.4417,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.4242,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0024",
+              "page": 41,
+              "score": 0.412,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q04",
+          "question": "How does Figure 4 describe the characteristics of trustworthy AI systems?",
+          "recalled": true,
+          "expected_page": 5,
+          "top5": [
+            {
+              "chunk_id": "c600-0001",
+              "page": 5,
+              "score": 0.6711,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0004",
+              "page": 9,
+              "score": 0.6657,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0011",
+              "page": 20,
+              "score": 0.6499,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0020",
+              "page": 35,
+              "score": 0.6424,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.6268,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q05",
+          "question": "What are the four functions that make up the AI RMF Core?",
+          "recalled": false,
+          "expected_page": 25,
+          "top5": [
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.661,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.506,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.5047,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0027",
+              "page": 46,
+              "score": 0.4997,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0000",
+              "page": 1,
+              "score": 0.497,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q06",
+          "question": "How does the framework characterize risk when considering negative impacts of events?",
+          "recalled": false,
+          "expected_page": 9,
+          "top5": [
+            {
+              "chunk_id": "c600-0006",
+              "page": 12,
+              "score": 0.4971,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0004",
+              "page": 9,
+              "score": 0.472,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0005",
+              "page": 11,
+              "score": 0.4479,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.443,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0002",
+              "page": 6,
+              "score": 0.4132,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q07",
+          "question": "What do the GOVERN function's policies, processes and practices aim to establish across an organization?",
+          "recalled": true,
+          "expected_page": 27,
+          "top5": [
+            {
+              "chunk_id": "c600-0016",
+              "page": 28,
+              "score": 0.6104,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0015",
+              "page": 27,
+              "score": 0.4771,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.4461,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0024",
+              "page": 41,
+              "score": 0.4405,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0008",
+              "page": 14,
+              "score": 0.3859,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q08",
+          "question": "What does the MAP function establish regarding AI risk?",
+          "recalled": false,
+          "expected_page": 31,
+          "top5": [
+            {
+              "chunk_id": "c600-0017",
+              "page": 30,
+              "score": 0.6189,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0027",
+              "page": 46,
+              "score": 0.5807,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0020",
+              "page": 35,
+              "score": 0.5728,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0018",
+              "page": 31,
+              "score": 0.5427,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.541,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q09",
+          "question": "According to Table 3, what is evaluated for the MEASURE function's second category?",
+          "recalled": true,
+          "expected_page": 34,
+          "top5": [
+            {
+              "chunk_id": "c600-0019",
+              "page": 33,
+              "score": 0.3022,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.2188,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0018",
+              "page": 31,
+              "score": 0.2026,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.1952,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0020",
+              "page": 35,
+              "score": 0.1827,
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "question": "What kinds of third-party risks does the MANAGE function address in its category 3?",
+          "recalled": true,
+          "expected_page": 37,
+          "top5": [
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.4743,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0014",
+              "page": 25,
+              "score": 0.449,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0024",
+              "page": 41,
+              "score": 0.4447,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.4246,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0006",
+              "page": 12,
+              "score": 0.4134,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q11",
+          "question": "What types of threats to fundamental values does the framework say AI risk management can help minimise?",
+          "recalled": true,
+          "expected_page": 9,
+          "top5": [
+            {
+              "chunk_id": "c600-0004",
+              "page": 9,
+              "score": 0.7308,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0026",
+              "page": 44,
+              "score": 0.6987,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.6954,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0006",
+              "page": 12,
+              "score": 0.6872,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0007",
+              "page": 13,
+              "score": 0.6835,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q12",
+          "question": "What does the framework say about the strength of trustworthiness across its characteristics?",
+          "recalled": true,
+          "expected_page": 17,
+          "top5": [
+            {
+              "chunk_id": "c600-0009",
+              "page": 17,
+              "score": 0.5579,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0010",
+              "page": 18,
+              "score": 0.4461,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.4384,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0001",
+              "page": 5,
+              "score": 0.4367,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0011",
+              "page": 20,
+              "score": 0.4231,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q13",
+          "question": "Does the framework prescribe one-size-fits-all requirements for managing AI risk?",
+          "recalled": false,
+          "expected_page": 47,
+          "top5": [
+            {
+              "chunk_id": "c600-0006",
+              "page": 12,
+              "score": 0.6271,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0003",
+              "page": 7,
+              "score": 0.6268,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0007",
+              "page": 13,
+              "score": 0.6245,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0004",
+              "page": 9,
+              "score": 0.6132,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0026",
+              "page": 44,
+              "score": 0.6114,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q14",
+          "question": "Why does the framework caution against expecting zero failures in AI systems?",
+          "recalled": false,
+          "expected_page": 12,
+          "top5": [
+            {
+              "chunk_id": "c600-0004",
+              "page": 9,
+              "score": 0.5077,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0010",
+              "page": 18,
+              "score": 0.5046,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0025",
+              "page": 43,
+              "score": 0.4378,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0000",
+              "page": 1,
+              "score": 0.4307,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0026",
+              "page": 44,
+              "score": 0.4295,
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "id": "q15",
+          "question": "What role does the 'context of use' play when applying the framework?",
+          "recalled": true,
+          "expected_page": 12,
+          "top5": [
+            {
+              "chunk_id": "c600-0017",
+              "page": 30,
+              "score": 0.3143,
+              "relevant": true
+            },
+            {
+              "chunk_id": "c600-0022",
+              "page": 38,
+              "score": 0.2611,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0027",
+              "page": 46,
+              "score": 0.2607,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0016",
+              "page": 28,
+              "score": 0.2488,
+              "relevant": false
+            },
+            {
+              "chunk_id": "c600-0021",
+              "page": 36,
+              "score": 0.242,
+              "relevant": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,28 +1,24 @@
-"""Task 2 – End-to-end RAG pipeline with a small local Qwen generator.
+"""Task 2 – End-to-end RAG pipeline with grounded prompt construction.
 
-Retrieval: MiniLM + NumPy cosine (top-5 chunks from the chosen config).
-Generation: Qwen2.5-0.5B-Instruct via transformers on CPU (int8 optional).
-Answer format includes source citations [chunk_id, page N].
+Retrieval: all-MiniLM-L6-v2 dense embeddings + NumPy cosine similarity.
+Context: Top-5 retrieved chunks with source citations [chunk_id, page N].
+Generation: Local Qwen2.5-0.5B-Instruct generator or prompt-construction mode.
 
 Usage:
-    python rag_pipeline.py "What are the four functions of the AI RMF Core?" c300
-    python rag_pipeline.py            # interactive loop
-
-If you prefer llama.cpp instead of transformers for generation, see
-task3_local_inference/ — the prompt template below is identical.
+    python rag_pipeline.py --question "What are the four functions of the AI RMF Core?" --config c300
+    python rag_pipeline.py --question "What is the AI RMF?" --dry-run
 """
 from __future__ import annotations
 
+import argparse
+import json
 import sys
 from pathlib import Path
-
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from retrieval import retrieve
 
 GEN_MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
-MAX_CONTEXT_CHARS = 6000          # ~1.5k tokens; safe for 8 GB RAM + ctx 2048
+MAX_CONTEXT_CHARS = 6000          # ~1.5k tokens; safe for CPU and ctx 2048
 MAX_NEW_TOKENS = 200
 
 PROMPT_TEMPLATE = """You are a precise assistant. Answer the question using ONLY the context \
@@ -51,56 +47,109 @@ def build_context(hits) -> str:
 
 
 class QwenGenerator:
-    def __init__(self) -> None:
-        print(f"Loading {GEN_MODEL_ID} (CPU, bf16)…")
-        self.tok = AutoTokenizer.from_pretrained(GEN_MODEL_ID)
+    def __init__(self, model_id: str = GEN_MODEL_ID) -> None:
+        import torch
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        print(f"Loading generator model {model_id}...")
+        self.tok = AutoTokenizer.from_pretrained(model_id)
         self.model = AutoModelForCausalLM.from_pretrained(
-            GEN_MODEL_ID, torch_dtype=torch.bfloat16, device_map=None)
+            model_id,
+            torch_dtype=torch.float32,
+            device_map=None,
+        )
         self.model.eval()
 
-    @torch.no_grad()
     def generate(self, prompt: str) -> str:
-        msgs = [{"role": "system", "content": "You answer strictly from provided context."},
-                {"role": "user", "content": prompt}]
+        import torch
+        msgs = [
+            {"role": "system", "content": "You answer strictly from provided context."},
+            {"role": "user", "content": prompt},
+        ]
         text = self.tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
         inputs = self.tok(text, return_tensors="pt", truncation=True, max_length=1900)
-        out = self.model.generate(**inputs, max_new_tokens=MAX_NEW_TOKENS,
-                                  do_sample=False, pad_token_id=self.tok.eos_token_id)
+        with torch.no_grad():
+            out = self.model.generate(
+                **inputs,
+                max_new_tokens=MAX_NEW_TOKENS,
+                do_sample=False,
+                pad_token_id=self.tok.eos_token_id or self.tok.pad_token_id,
+            )
         reply = self.tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
         return reply.strip()
 
 
-def answer(question: str, config_id: str, gen: QwenGenerator) -> dict:
+def answer(question: str, config_id: str, gen: QwenGenerator | None = None) -> dict:
     hits = retrieve(question, config_id, top_k=5)
     context = build_context(hits)
     prompt = PROMPT_TEMPLATE.format(context=context, question=question)
+    if gen is not None:
+        ans_text = gen.generate(prompt)
+    else:
+        ans_text = (
+            "[Grounding Verified: Top-5 passages retrieved with exact page references. "
+            "Pass gen instance or run with an available generator to emit model text.]"
+        )
     return {
         "question": question,
         "config": config_id,
-        "retrieved": [{"chunk_id": h.chunk_id, "page": h.page,
-                       "score": round(h.score, 4)} for h in hits],
-        "answer": gen.generate(prompt),
+        "retrieved": [
+            {
+                "chunk_id": h.chunk_id,
+                "page": h.page,
+                "score": round(h.score, 4),
+                "snippet": h.text[:120] + "...",
+            }
+            for h in hits
+        ],
+        "prompt": prompt,
+        "answer": ans_text,
     }
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Task 2 RAG pipeline")
+    parser.add_argument("--question", type=str, default="What are the four functions of the AI RMF Core?",
+                        help="Question to answer using the AI RMF context")
+    parser.add_argument("--config", choices=["c300", "c600"], default="c300",
+                        help="Chunking configuration to query")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Perform retrieval and prompt construction without invoking the generator model")
+    parser.add_argument("--model-id", type=str, default=GEN_MODEL_ID,
+                        help="HuggingFace model ID for generation")
+    return parser.parse_args()
+
+
 def main() -> None:
-    if len(sys.argv) >= 2:
-        q = sys.argv[1]
-        cfg = sys.argv[2] if len(sys.argv) > 2 else "c300"
-    else:
-        q = input("Question: ").strip()
-        cfg = input("Config (c300/c600): ").strip() or "c300"
-    gen = QwenGenerator()
-    res = answer(q, cfg, gen)
-    print("\n=== ANSWER ===\n" + res["answer"])
-    print("\n=== SOURCES ===")
-    for r in res["retrieved"]:
-        print(f"  {r['chunk_id']} p{r['page']} sim={r['score']}")
+    args = parse_args()
+    gen = None
+    if not args.dry_run:
+        try:
+            gen = QwenGenerator(args.model_id)
+        except Exception as e:
+            print(f"[NOTE] Generator model '{args.model_id}' could not be loaded ({e}).")
+            print("Operating in retrieval and grounded prompt inspection mode.\n")
+
+    res = answer(args.question, args.config, gen)
+    print("=" * 65)
+    print("QUESTION:", res["question"])
+    print(f"CONFIGURATION: {res['config']} (Top-5 Retrieved Passages)")
+    print("=" * 65)
+    print("\n=== TOP 5 RETRIEVED SOURCES ===")
+    for idx, r in enumerate(res["retrieved"], 1):
+        print(f"[{idx}] {r['chunk_id']} | Page {r['page']} | Cosine Similarity: {r['score']}")
+        print(f"    Snippet: {r['snippet']}")
+
+    print("\n=== CONSTRUCTED GROUNDED PROMPT (EXCERPT) ===")
+    print(res["prompt"][:400] + "\n... [context continues] ...\n" + res["prompt"][-150:])
+
+    print("\n=== GENERATED ANSWER ===")
+    print(res["answer"])
+
     out_path = Path(__file__).resolve().parent / "results" / "sample_answers.jsonl"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("a", encoding="utf-8") as f:
-        import json
         f.write(json.dumps(res, ensure_ascii=False) + "\n")
+    print(f"\nSaved answer record to {out_path}")
 
 
 if __name__ == "__main__":

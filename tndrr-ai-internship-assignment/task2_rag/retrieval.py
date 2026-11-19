@@ -6,6 +6,11 @@ Run smoke test:  python retrieval.py c300 "What are the four functions?"
 """
 from __future__ import annotations
 
+import os
+# Prioritize local cache to avoid network ping delays
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
