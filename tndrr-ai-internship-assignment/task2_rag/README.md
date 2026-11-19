@@ -213,7 +213,7 @@ python rag_pipeline.py --question "What are the four functions of the AI RMF Cor
 
 ### Option B: Run in Google Colab
 
-1. Open Google Colab and upload [task2_rag_pipeline.ipynb](file:///C:/Users/rahul/.gemini/antigravity/scratch/Tndrr-ai/tndrr-ai-internship-assignment/task2_rag/task2_rag_pipeline.ipynb).
+1. Open Google Colab and open `task2_rag_pipeline.ipynb` (or open from GitHub).
 2. Run all cells sequentially. The notebook installs dependencies, extracts text, generates embeddings, calculates Recall@5 for both chunk sizes, and runs interactive grounded querying.
 
 ---

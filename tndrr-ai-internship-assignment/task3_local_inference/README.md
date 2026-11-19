@@ -179,7 +179,7 @@ python memory_estimation.py
 
 ### Option B: Google Colab Alternative (GPU / High-RAM CPU)
 
-1. Open Google Colab and upload [task3_quantization_benchmark.ipynb](file:///C:/Users/rahul/.gemini/antigravity/scratch/Tndrr-ai/tndrr-ai-internship-assignment/task3_local_inference/task3_quantization_benchmark.ipynb).
+1. Open Google Colab and open `task3_quantization_benchmark.ipynb` (or open from GitHub).
 2. Run all cells sequentially to download models, benchmark Q8_0 vs Q4_K_M, export the comparison CSV, and calculate serving constraints.
 
 ---
