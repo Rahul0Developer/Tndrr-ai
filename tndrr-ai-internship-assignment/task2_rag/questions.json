@@ -1,0 +1,126 @@
+{
+  "document": "NIST AI 100-1 (AI Risk Management Framework 1.0), April 2023, 48 PDF pages",
+  "relevance_rule": "A retrieved chunk is RELEVANT for a question if ALL of its relevant_keywords occur in the chunk text (case-insensitive substring match). Keywords and expected_page values were verified against the actual extracted text of this PDF.",
+  "questions": [
+    {
+      "id": "q01",
+      "question": "What is the name and version of the framework described in this document?",
+      "answer": "The Artificial Intelligence Risk Management Framework, AI RMF 1.0, published as NIST AI 100-1.",
+      "passage": "Artificial Intelligence Risk Management Framework (AI RMF 1.0) — cover page.",
+      "expected_page": 1,
+      "relevant_keywords": ["risk management framework", "ai rmf"]
+    },
+    {
+      "id": "q02",
+      "question": "Which organization published the AI RMF 1.0?",
+      "answer": "The National Institute of Standards and Technology (NIST), U.S. Department of Commerce.",
+      "passage": "Cover/acknowledgements: National Institute of Standards and Technology.",
+      "expected_page": 1,
+      "relevant_keywords": ["national institute of standards and technology"]
+    },
+    {
+      "id": "q03",
+      "question": "Is participation in the AI RMF mandatory or voluntary for organizations?",
+      "answer": "Voluntary — the Framework is intended to be voluntary, rights-preserving, non-sector-specific and use-case agnostic.",
+      "passage": "The Framework is intended to be voluntary, rights-preserving, non-sector-specific, and use-case agnostic...",
+      "expected_page": 7,
+      "relevant_keywords": ["voluntary", "rights-preserving"]
+    },
+    {
+      "id": "q04",
+      "question": "How does Figure 4 describe the characteristics of trustworthy AI systems?",
+      "answer": "Valid & Reliable is shown as a necessary condition / base for the other trustworthiness characteristics.",
+      "passage": "Fig. 4 Characteristics of trustworthy AI systems. Valid & Reliable is a necessary condition of trustworthiness and is shown as the base...",
+      "expected_page": 5,
+      "relevant_keywords": ["valid & reliable", "trustworthiness"]
+    },
+    {
+      "id": "q05",
+      "question": "What are the four functions that make up the AI RMF Core?",
+      "answer": "GOVERN, MAP, MEASURE, and MANAGE.",
+      "passage": "...the Core is composed of four functions: GOVERN, MAP, MEASURE, and MANAGE.",
+      "expected_page": 25,
+      "relevant_keywords": ["four functions", "govern", "map", "measure", "manage"]
+    },
+    {
+      "id": "q06",
+      "question": "How does the framework characterize risk when considering negative impacts of events?",
+      "answer": "By the probability of occurring and the magnitude or degree of the consequences of the corresponding event (adapted from ISO 31000:2018).",
+      "passage": "When considering the negative impact of a potential event, risk ... probability of occurring and the magnitude ... consequences.",
+      "expected_page": 9,
+      "relevant_keywords": ["probability of occurring", "magnitude"]
+    },
+    {
+      "id": "q07",
+      "question": "What do the GOVERN function's policies, processes and practices aim to establish across an organization?",
+      "answer": "Accountability structures and risk-management culture/policies spanning the organization for handling AI risks.",
+      "passage": "Table 1: GOVERN 1: Policies, processes, procedures, and practices across the organization... risk culture.",
+      "expected_page": 27,
+      "relevant_keywords": ["policies, processes, procedures", "organization"]
+    },
+    {
+      "id": "q08",
+      "question": "What does the MAP function establish regarding AI risk?",
+      "answer": "Context is established and understood to frame risks related to an AI system across the AI lifecycle.",
+      "passage": "MAP ... establishes the context to frame risks related to an AI system. The AI lifecycle consists of many interdependent activities...",
+      "expected_page": 31,
+      "relevant_keywords": ["establishes the context", "frame"]
+    },
+    {
+      "id": "q09",
+      "question": "According to Table 3, what is evaluated for the MEASURE function's second category?",
+      "answer": "MEASURE 2: AI systems are evaluated for trustworthy characteristics (qualitatively or quantitatively).",
+      "passage": "MEASURE 2: AI systems are evaluated for trustworthy characteristics.",
+      "expected_page": 34,
+      "relevant_keywords": ["measure 2", "evaluated"]
+    },
+    {
+      "id": "q10",
+      "question": "What kinds of third-party risks does the MANAGE function address in its category 3?",
+      "answer": "MANAGE 3: AI risks and benefits from third-party entities are managed (e.g., outcomes inconsistent with intended use).",
+      "passage": "MANAGE 3: AI risks and benefits from third-party entities are managed.",
+      "expected_page": 37,
+      "relevant_keywords": ["third-party entities"]
+    },
+    {
+      "id": "q11",
+      "question": "What types of threats to fundamental values does the framework say AI risk management can help minimise?",
+      "answer": "Threats to civil liberties and rights, among other potential negative impacts.",
+      "passage": "AI risk management offers a path to minimize potential negative impacts of AI systems, such as threats to civil liberties and rights...",
+      "expected_page": 9,
+      "relevant_keywords": ["civil liberties"]
+    },
+    {
+      "id": "q12",
+      "question": "What does the framework say about the strength of trustworthiness across its characteristics?",
+      "answer": "Trustworthiness ranges across a spectrum and is only as strong as its weakest characteristics.",
+      "passage": "...concept that ranges across a spectrum and is only as strong as its weakest characteristics.",
+      "expected_page": 17,
+      "relevant_keywords": ["weakest characteristics"]
+    },
+    {
+      "id": "q13",
+      "question": "Does the framework prescribe one-size-fits-all requirements for managing AI risk?",
+      "answer": "No — it recommends risk-based approaches rather than prescribing one-size-fits-all requirements.",
+      "passage": "...rather than prescribe one-size-fits-all requirements.",
+      "expected_page": 47,
+      "relevant_keywords": ["one-size-fits-all"]
+    },
+    {
+      "id": "q14",
+      "question": "Why does the framework caution against expecting zero failures in AI systems?",
+      "answer": "Because not all incidents and failures can be eliminated; unrealistic expectations about risk management can be counterproductive.",
+      "passage": "...not all incidents and failures can be eliminated. Unrealistic expectations about risk ma...",
+      "expected_page": 12,
+      "relevant_keywords": ["incidents and failures can be eliminated"]
+    },
+    {
+      "id": "q15",
+      "question": "What role does the 'context of use' play when applying the framework?",
+      "answer": "Risk prioritisation and controls are tailored to the specific context of use by the AI deployer.",
+      "passage": "...customized or tailored to the specific context of use by the AI deployer can be a contributing factor.",
+      "expected_page": 12,
+      "relevant_keywords": ["context of use"]
+    }
+  ]
+}
