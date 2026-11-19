@@ -170,26 +170,35 @@ def main() -> None:
 
     collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
-    training_args = TrainingArguments(
-        output_dir=str(LORA_OUTPUT_DIR.parent / "trainer_out"),
-        per_device_train_batch_size=batch_size,
-        gradient_accumulation_steps=tr_cfg.gradient_accumulation_steps,
-        learning_rate=learning_rate,
-        num_train_epochs=num_epochs,
-        max_steps=args_cli.max_steps,
-        warmup_ratio=tr_cfg.warmup_ratio,
-        weight_decay=tr_cfg.weight_decay,
-        lr_scheduler_type=tr_cfg.lr_scheduler,
-        logging_steps=tr_cfg.logging_steps,
-        save_strategy="epoch",
-        save_total_limit=1,
-        report_to="none",
-        fp16=has_cuda and not args_cli.qlora and not torch.cuda.is_bf16_supported(),
-        bf16=has_cuda and not args_cli.qlora and torch.cuda.is_bf16_supported(),
-        gradient_checkpointing=True,
-        dataloader_num_workers=0,
-        seed=RANDOM_SEED,
-    )
+    import inspect
+    sig = inspect.signature(TrainingArguments.__init__).parameters
+
+    total_steps = max(1, (len(train_ds) // (batch_size * tr_cfg.gradient_accumulation_steps)) * num_epochs)
+    warmup_steps = max(1, int(tr_cfg.warmup_ratio * total_steps))
+
+    raw_args = {
+        "output_dir": str(LORA_OUTPUT_DIR.parent / "trainer_out"),
+        "per_device_train_batch_size": batch_size,
+        "gradient_accumulation_steps": tr_cfg.gradient_accumulation_steps,
+        "learning_rate": learning_rate,
+        "num_train_epochs": num_epochs,
+        "max_steps": args_cli.max_steps,
+        "warmup_steps": warmup_steps,
+        "weight_decay": tr_cfg.weight_decay,
+        "lr_scheduler_type": tr_cfg.lr_scheduler,
+        "logging_steps": tr_cfg.logging_steps,
+        "save_strategy": "epoch",
+        "save_total_limit": 1,
+        "report_to": "none",
+        "fp16": has_cuda and not args_cli.qlora and not torch.cuda.is_bf16_supported(),
+        "bf16": has_cuda and not args_cli.qlora and torch.cuda.is_bf16_supported(),
+        "gradient_checkpointing": True,
+        "dataloader_num_workers": 0,
+        "seed": RANDOM_SEED,
+    }
+    # Pass only arguments accepted by the active transformers version
+    filtered_args = {k: v for k, v in raw_args.items() if k in sig}
+    training_args = TrainingArguments(**filtered_args)
 
     trainer = Trainer(
         model=model,
